@@ -1,0 +1,91 @@
+<div class="container">
+  <h1>Système gestion de réservation</h1>
+  <div class="row">
+
+    <div *ngIf="message_validation" class=" alert alert-warning" role="alert"
+      style="margin-top: 10px; margin-left: 12px;"><strong>L'heure début et de fin doit être supérieur ou inférieur.
+        Veuillez choisir une date conforme </strong> </div>
+
+    <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
+      <div class="col-md-2">
+        <mat-form-field>
+          <input matInput [matDatepickerFilter]="DateFilter" [matDatepicker]="picker" placeholder="Choisir une date"
+            name="date" required ngModel>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+      </div>
+
+      <div class="col-md-2">
+        <mat-form-field>
+          <mat-label>Choisir une date début <mat-icon>alarm</mat-icon>
+          </mat-label>
+          <select matNativeControl name="datedebut" ngModel required>
+            <option *ngFor="let heure of heures">
+              {{heure.viewValue}}
+            </option>
+          </select>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-2">
+        <mat-form-field>
+          <mat-label>Choisir une date fin <mat-icon>alarm</mat-icon>
+          </mat-label>
+          <select matNativeControl name="datefin" ngModel required>
+            <option *ngFor="let heure of heures">
+              {{heure.viewValue}}
+            </option>
+          </select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <mat-form-field>
+          <mat-label>Choisir une option </mat-label>
+          <select matNativeControl name="equipement" ngModel required>
+            <option *ngFor="let equipements of equipement">
+              {{equipements.viewValue}}
+            </option>
+          </select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-2">
+        <input class="btn btn-primary" type="submit" value="Recherche des Salles">
+      </div>
+    </form>
+
+  </div>
+
+  <br>
+
+  <div class="row">
+
+    <div class="col-md-4" *ngFor="let menus of menu">
+      <div class="card " style="width: 20rem;">
+
+        <div class="card-header">Salle Disponible </div>
+        <div class="card-body">
+          <ul>
+            <li>Numéro salle :{{menus.numero_salle}} </li>
+            <li>Equipement : {{menus.equipement}}</li>
+            <li> Capacité : {{menus.capacite}}</li>
+
+          </ul>
+
+        </div>
+        <div class="card-footer">
+          <input class="btn btn-primary" type="button" (click)="Reserver(menus)" value="Réserver">
+        </div>
+
+
+      </div>
+    </div>
+
+
+  </div>
+
+
+
+
+</div>
