@@ -1,27 +1,18 @@
-# Reservation
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.6.
+Contexte du projet : 
 
-## Development server
+Un espace de coworking possède plusieurs salles de réunion à disposition des startups qui y travaillent. L’objectif de l’exercice est de coder une système de réservation simple pour ces salles.
+Tu vas réaliser un petit site pour pouvoir rechercher et réserver l’une des salles de réunion, en fonction des disponibilités, de la capacité et des équipements.
+Chaque réservation doit être enregistrée dans un fichier .json. Lors d'une seconde recherche, si on cherche pour la même date/heure, la salle de réunion réservée précédemment n'apparaîtra pas dans la liste des salles disponibles.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Utilisation technologie : 
 
-## Code scaffolding
+Front-end :
+-  Angular
+-  Angular Material (utilisation datepicker)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Back-end : 
+- Node/ ExpressJS
+- Base de donnée MySQL
+- Knex.js
+  
