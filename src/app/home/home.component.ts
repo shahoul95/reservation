@@ -24,9 +24,9 @@ export class HomeComponent implements OnInit {
   ];
 
   equipement = [
-
-    { value: 'PC', viewValue: 'PC' },
-    { value: 'Projecteur', viewValue: 'Projecteur' },
+ 
+    { value: 'TV', viewValue: 'TV' },
+    { value: 'Retro Projecteur', viewValue: 'Retro Projecteur' },
   ];
   menu: any;
   getsalle: any;
