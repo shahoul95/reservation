@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SalledispoService } from '../service/salledispo.service';
-import { DateFilterFn } from '@angular/material/datepicker';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
   }
-//  Bloquage des dates qui est déja passer et commence la date actuelle
+
   DateFilter = (m: Date | null): boolean => {
     const dateNum = m?.getDay();
     if (dateNum !== undefined) {
@@ -48,11 +48,9 @@ export class HomeComponent implements OnInit {
 
   }
 
-// Récupération des salles disponibles à partir une date et l'heure de debut et l'heure de fin
+
   async onSubmit(f: NgForm) {
-    console.log(f.value);
-    console.log(f.valid);
-    console.log(f.value.datefin);
+  
     try {
 
       if (parseInt(f.value.datefin) <= parseInt(f.value.datedebut)) {
@@ -60,24 +58,23 @@ export class HomeComponent implements OnInit {
       } else {
 
         await this.salledisponible.GetSalleDispo(f.value).then((res: any) => this.menu = res.data).catch(() => console.error('Failed!'));
-        console.log(this.menu)
+   
       }
     } catch (error) {
-      console.log(error);
+       return error;
     }
 
 
   }
 
-//redirection dans la page success 
+
   RedirectSuccessPage() {
     this.router.navigateByUrl('successpage');
   }
 
-// Fonction qu va permetrrre de récupérer  la salle sélectionner et de envoyer dans la fonction PostReservationSalle pour créer la réservation dans la base de donnée
+
   async Reserver(value: object) {
-    console.dir(value);
-    console.log(value);
+   
     try {
       this.getsalle = await this.salledisponible.PostReservationSalle(value).then((res: any) => { return res }).catch(() => console.error('Failed!'));
       switch (this.getsalle.status) {
@@ -86,11 +83,11 @@ export class HomeComponent implements OnInit {
           break;
 
         default:
-          console.log("Erreur de réservation");
+         return "erreur de reservation";
       }
 
     } catch (error) {
-      console.log(error);
+    return error;
     }
   }
 }
