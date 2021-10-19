@@ -56,7 +56,7 @@ export class HomeComponent implements OnInit {
       if (parseInt(f.value.datefin) <= parseInt(f.value.datedebut)) {
         this.message_validation = true;
       } else {
-
+        this.message_validation = false;
         await this.salledisponible.GetSalleDispo(f.value).then((res: any) => this.menu = res.data).catch(() => console.error('Failed!'));
    
       }
