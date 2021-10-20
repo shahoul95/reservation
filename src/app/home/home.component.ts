@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DateAdapter } from '@angular/material/core';
 import { SalledispoService } from '../service/salledispo.service';
-
+import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {ModalComponent}  from '../modal/modal.component'
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -24,18 +26,21 @@ export class HomeComponent implements OnInit {
   ];
 
   equipement = [
- 
+
     { value: 'TV', viewValue: 'TV' },
     { value: 'Retro Projecteur', viewValue: 'Retro Projecteur' },
   ];
-  menu: any;
+  roomsfailed: boolean = false;
+  sallelength: boolean = false;
+  rooms = new Array();
   getsalle: any;
   today = new Date()
 
 
-  constructor(private salledisponible: SalledispoService, private router: Router) { }
+  constructor(private salledisponible: SalledispoService, private router: Router, private adapter: DateAdapter<any>,public dialog: MatDialog) { }
 
   ngOnInit(): void {
+    this.adapter.setLocale('fr');
   }
 
   DateFilter = (m: Date | null): boolean => {
@@ -50,22 +55,27 @@ export class HomeComponent implements OnInit {
 
 
   async onSubmit(f: NgForm) {
-  
+
     try {
 
       if (parseInt(f.value.datefin) <= parseInt(f.value.datedebut)) {
         this.message_validation = true;
+        this.roomsfailed = false;
+        this.sallelength = false;
       } else {
+        this.roomsfailed = true;
         this.message_validation = false;
-        await this.salledisponible.GetSalleDispo(f.value).then((res: any) => this.menu = res.data).catch(() => console.error('Failed!'));
-   
+        this.sallelength = true;
+        await this.salledisponible.GetSalleDispo(f.value).then((res) => this.rooms = res.data).catch((error) => console.error('Failed!', error));
+
       }
     } catch (error) {
-       return error;
+      return error;
     }
 
 
   }
+ 
 
 
   RedirectSuccessPage() {
@@ -74,20 +84,32 @@ export class HomeComponent implements OnInit {
 
 
   async Reserver(value: object) {
-   
+
     try {
-      this.getsalle = await this.salledisponible.PostReservationSalle(value).then((res: any) => { return res }).catch(() => console.error('Failed!'));
+      this.getsalle = await this.salledisponible.PostReservationSalle(value).then((res) => { return res }).catch((error) => console.error('Failed!', error));
       switch (this.getsalle.status) {
         case 200:
           this.RedirectSuccessPage();
           break;
 
         default:
-         return "erreur de reservation";
+          return "erreur de reservation";
       }
 
     } catch (error) {
-    return error;
+      return error;
     }
   }
+
+  openDialog(value : object) {
+    const dialogRef = this.dialog.open(ModalComponent,{data: value});
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == true){
+        this.Reserver(value);
+      }
+     
+    });
+  }
+
 }

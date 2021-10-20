@@ -9,7 +9,8 @@ import { DemoMaterialModule } from './material';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
-import { SuccesspageComponent } from './successpage/successpage.component'
+import { SuccesspageComponent } from './successpage/successpage.component';
+import { ModalComponent } from './modal/modal.component'
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { SuccesspageComponent } from './successpage/successpage.component'
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    SuccesspageComponent
+    SuccesspageComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

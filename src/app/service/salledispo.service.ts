@@ -6,33 +6,41 @@ import axios from 'axios';
 })
 export class SalledispoService {
 
- salledispo : any;
- getsalle : any;
- parseelocalstorage :any;
+  salledispo= new Array<object>();
+  getsalle= new Array<object>();
+  parseelocalstorage: any;
 
   constructor() { }
 
 
-  async GetSalleDispo(date : any){
+  async GetSalleDispo(date: object) {
     try {
-         
-     localStorage.setItem('data', JSON.stringify(date));
-     this.salledispo = await axios.post('http://localhost:3000/getreservation',date);
+
+      localStorage.setItem('data', JSON.stringify(date));
+      this.salledispo = await axios.post('http://localhost:3000/getreservation', date);
       return this.salledispo;
     }
     catch (error) {
-       return error;
+      return error;
     }
   }
 
-  
-  async PostReservationSalle(getsalle : object){
-   
-        this.parseelocalstorage = localStorage.getItem('data');
-        const parse = JSON.parse(this.parseelocalstorage);
-        const returnedTarget = Object.assign(getsalle,parse);
-          localStorage.setItem('data', JSON.stringify(returnedTarget));
-         this.getsalle = await axios.post('http://localhost:3000/createreservationsalle',returnedTarget);
-         return this.getsalle;
-   }
+
+  async PostReservationSalle(getsalle: object) {
+    try {
+
+      this.parseelocalstorage = localStorage.getItem('data');
+      const parse = JSON.parse(this.parseelocalstorage);
+      const getsalles = Object.assign(getsalle, parse);
+      localStorage.setItem('data', JSON.stringify(getsalles));
+
+      this.getsalle = await axios.post('http://localhost:3000/createreservationsalle', getsalles);
+      return this.getsalle;
+
+
+    } catch (error) {
+      return error;
+    }
+
+  }
 }

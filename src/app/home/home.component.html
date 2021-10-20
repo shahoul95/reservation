@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Système gestion de réservation</h1>
+  <h1> Systèmes gestion de réservation </h1>
   <div class="row">
 
     <div *ngIf="message_validation" class=" alert alert-warning" role="alert"
@@ -7,7 +7,7 @@
         Veuillez choisir une date conforme </strong> </div>
 
     <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
-      <div class="col-md-2">
+      <div class="col-md-2 ">
         <mat-form-field>
           <input matInput [matDatepickerFilter]="DateFilter" [matDatepicker]="picker" placeholder="Choisir une date"
             name="date" required ngModel>
@@ -60,22 +60,24 @@
   <br>
 
   <div class="row">
+    <h2 *ngIf="sallelength">Nombre de salles disponible : {{ rooms?.length || '0'  }}</h2>
+    <div class="col-md-4" *ngFor="let room of rooms">
 
-    <div class="col-md-4" *ngFor="let menus of menu">
-      <div class="card " style="width: 20rem;">
+      <div *ngIf="roomsfailed" class="card " style="width: 20rem;">
 
         <div class="card-header">Salle Disponible </div>
         <div class="card-body">
           <ul>
-            <li>Numéro salle :{{menus.numero_salle}} </li>
-            <li>Equipement : {{menus.equipement}}</li>
-            <li> Capacité : {{menus.capacite}}</li>
+            <li>Numéro salle :{{room.numero_salle}} </li>
+            <li>Equipement : {{room.equipement}}</li>
+            <li> Capacité : {{room.capacite}}</li>
 
           </ul>
 
         </div>
         <div class="card-footer">
-          <input class="btn btn-primary" type="button" (click)="Reserver(menus)" value="Réserver">
+
+          <button class="btn btn-primary" (click)="openDialog(room)">Réserver</button>
         </div>
 
 
