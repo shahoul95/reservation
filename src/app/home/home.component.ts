@@ -102,14 +102,18 @@ export class HomeComponent implements OnInit {
   }
 
   openDialog(value : object) {
-    const dialogRef = this.dialog.open(ModalComponent,{data: value});
+    try{
+      const dialogRef = this.dialog.open(ModalComponent,{data: value});
+       dialogRef.afterClosed().subscribe(result => {
+        if(result == true){
+          this.Reserver(value);
+        }
+       
+      });
+    }catch(error){
 
-    dialogRef.afterClosed().subscribe(result => {
-      if(result == true){
-        this.Reserver(value);
-      }
-     
-    });
+    }
+   
   }
 
 }
