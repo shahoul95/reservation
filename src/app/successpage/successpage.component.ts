@@ -16,7 +16,7 @@ export class SuccesspageComponent implements OnInit {
   ngOnInit(): void {
     this.storagereservation = localStorage.getItem('data');
     this.parsestoragereservation = JSON.parse(this.storagereservation);
-    console.log(this.parsestoragereservation);
+    
   }
 
 }
