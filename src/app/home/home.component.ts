@@ -66,7 +66,7 @@ export class HomeComponent implements OnInit {
         this.roomsfailed = true;
         this.message_validation = false;
         this.sallelength = true;
-        await this.salledisponible.GetSalleDispo(f.value).then((res : any) => this.rooms = res.data).catch((error) => console.error('Failed!', error));
+        await this.salledisponible.GetSalleDispo(f.value).then((res: any) => this.rooms = res.data).catch((error) => console.error('Failed!', error));
 
       }
     } catch (error) {

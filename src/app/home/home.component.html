@@ -9,8 +9,8 @@
     <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate>
       <div class="col-md-2 ">
         <mat-form-field>
-          <input matInput [matDatepickerFilter]="DateFilter" [matDatepicker]="picker" placeholder="Choisir une date"
-            name="date" required ngModel>
+          <input matInput [matDatepickerFilter]="DateFilter" [matDatepicker]="picker" placeholder="Choisir une date" readonly="readonly"
+            name="date" ngModel required>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -51,7 +51,7 @@
         </mat-form-field>
       </div>
       <div class="col-md-2">
-        <input class="btn btn-primary" type="submit" value="Recherche des Salles">
+        <input class="btn btn-primary"  type="submit" value="Recherche des Salles">
       </div>
     </form>
 
