@@ -7,14 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./successpage.component.css']
 })
 export class SuccesspageComponent implements OnInit {
-  storagereservation: any;
+  storagereservation : string = '';
   parsestoragereservation: any;
   constructor() {
 
   }
 
   ngOnInit(): void {
-    this.storagereservation = localStorage.getItem('data');
+    this.storagereservation = localStorage.getItem('data')!;
     this.parsestoragereservation = JSON.parse(this.storagereservation);
     
   }
