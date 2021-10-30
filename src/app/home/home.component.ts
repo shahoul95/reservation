@@ -66,7 +66,7 @@ export class HomeComponent implements OnInit {
         this.roomsfailed = true;
         this.message_validation = false;
         this.sallelength = true;
-        await this.salledisponible.GetSalleDispo(f.value).then((res: any) => this.rooms = res.data).catch((error) => console.error('Failed!', error));
+        await this.salledisponible.GetSalleDispo(f.value).then((res: any) => this.rooms = res.data).catch((error) => {return error});
 
       }
     } catch (error) {
@@ -86,7 +86,7 @@ export class HomeComponent implements OnInit {
   async Reserver(value: object) {
 
     try {
-      this.getsalle = await this.salledisponible.PostReservationSalle(value).then((res) => { return res }).catch((error) => console.error('Failed!', error));
+      this.getsalle = await this.salledisponible.PostReservationSalle(value).then((res) => { return res }).catch((error) => {return error});
       switch (this.getsalle.status) {
         case 200:
           this.RedirectSuccessPage();
@@ -111,7 +111,7 @@ export class HomeComponent implements OnInit {
        
       });
     }catch(error){
-
+         return error;
     }
    
   }
