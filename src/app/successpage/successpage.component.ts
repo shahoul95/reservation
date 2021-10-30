@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-successpage',
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class SuccesspageComponent implements OnInit {
   storagereservation: any;
   parsestoragereservation: any;
-  constructor(private router: Router) {
+  constructor() {
 
   }
 
